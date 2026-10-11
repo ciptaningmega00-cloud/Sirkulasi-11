@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#9f1239">
+<title>RPM Interaktif Biologi XII - Peredaran Darah dan Golongan Darah</title>
+<style>
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.55;color:#1f2937;background:#f4f4f5}
+h1,h2,h3,h4{line-height:1.3;margin:0 0 8px}
+h2{font-size:21px}h3{font-size:18px}h4{font-size:16px}
+p{margin:0 0 10px}
+.hid{display:none!important}
+.wrap{max-width:960px;margin:0 auto;padding:12px}
+.small{font-size:14px;color:#52525b}
+.muted{color:#52525b}
+.bold{font-weight:bold}
+
+/* kepala & navigasi */
+.top{background:#9f1239;color:#fff;padding:12px 12px 8px}
+.top .in{max-width:960px;margin:0 auto}
+.top h1{font-size:19px;margin:0}
+.top p{margin:2px 0 0;font-size:14px;color:#ffe4e6}
+.tabs{display:flex;flex-wrap:wrap;margin:10px -2px 0}
+.tab-btn{flex:1 1 30%;margin:2px;min-height:44px;padding:8px 6px;border:0;border-radius:8px;background:#7f1d1d;color:#fff;font-size:14px;font-weight:bold;cursor:pointer}
+.tab-btn.on{background:#fff;color:#9f1239}
+
+/* komponen umum */
+.card{background:#fff;border:1px solid #e4e4e7;border-radius:12px;padding:14px;margin-bottom:14px}
+.card h3{padding-bottom:8px;border-bottom:1px solid #f0f0f2;margin-bottom:10px}
+.row{display:flex;flex-wrap:wrap;margin:0 -6px}
+.col{flex:1 1 260px;margin:0 6px 12px;min-width:0}
+.btn{display:inline-block;min-height:44px;padding:10px 16px;border:0;border-radius:10px;background:#be123c;color:#fff;font-size:16px;font-weight:bold;cursor:pointer;margin:0 6px 6px 0;text-align:center}
+.btn.alt{background:#e4e4e7;color:#27272a}
+.btn.ok{background:#047857}
+.btn:disabled{opacity:.5}
+.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:bold;background:#ffe4e6;color:#9f1239;margin:0 6px 6px 0}
+.sub{display:flex;flex-wrap:wrap;margin:0 -3px 12px}
+.sub button{flex:1 1 45%;margin:3px;min-height:44px;padding:8px;border:1px solid #d4d4d8;border-radius:10px;background:#fff;color:#3f3f46;font-size:14px;font-weight:bold;cursor:pointer}
+.sub button.on{background:#be123c;border-color:#be123c;color:#fff}
+select,input[type=text],textarea{width:100%;min-height:44px;padding:8px 10px;font-size:16px;border:1px solid #a1a1aa;border-radius:8px;background:#fff;color:#1f2937;font-family:inherit}
+label{display:block;font-weight:bold;margin:8px 0 4px}
+
+/* kotak umpan balik */
+.fb{padding:10px 12px;border-radius:10px;margin-top:8px;font-size:15px}
+.fb.ok{background:#d1fae5;color:#065f46}
+.fb.no{background:#ffe4e6;color:#9f1239}
+.fb.warn{background:#fef3c7;color:#92400e}
+.fb.info{background:#e0f2fe;color:#075985}
+
+/* banner & kartu warna */
+.banner{background:#9f1239;color:#fff;border-radius:14px;padding:18px 16px;margin-bottom:14px}
+.banner h2{font-size:23px}
+.banner p{color:#ffe4e6}
+.banner .btn{background:#fff;color:#9f1239}
+.banner .btn.alt{background:#7f1d1d;color:#fff}
+.c-amber{background:#fffbeb;border:1px solid #fcd34d}
+.c-rose{background:#fff1f2;border:1px solid #fda4af}
+.c-sky{background:#f0f9ff;border:1px solid #7dd3fc}
+.c-violet{background:#f5f3ff;border:1px solid #c4b5fd}
+.box{border-radius:10px;padding:12px;margin:0 0 10px}
+.box h4{margin-bottom:4px}
+.box p{margin:0;font-size:15px}
+
+/* daftar identitas & alur */
+.idl{margin:0;padding:0;list-style:none}
+.idl li{padding:8px 0;border-bottom:1px solid #f0f0f2}
+.idl span{display:block;font-size:13px;color:#52525b}
+.step{display:flex;padding:10px;margin-bottom:8px;border:1px solid #e4e4e7;border-radius:10px;background:#fafafa}
+.step .mn{flex:0 0 54px;width:54px;height:40px;line-height:40px;text-align:center;border-radius:8px;background:#be123c;color:#fff;font-weight:bold;margin-right:10px;font-size:14px}
+.step p{margin:0;font-size:15px}
+.step .tag{display:inline-block;font-size:12px;font-weight:bold;color:#9f1239;margin-bottom:2px}
+ol.guide{margin:0;padding-left:22px}
+ol.guide li{margin-bottom:4px}
+ul.plain{margin:0;padding-left:20px}
+ul.plain li{margin-bottom:4px}
+
+/* soal pilihan ganda (tes awal) */
+.q{border:1px solid #e4e4e7;border-radius:10px;padding:12px;margin-bottom:12px;background:#fafafa}
+.q .qn{font-size:13px;font-weight:bold;color:#9f1239}
+.q .qt{font-weight:bold;margin:2px 0 8px}
+.choice{display:block;width:100%;text-align:left;min-height:44px;padding:10px 12px;margin-bottom:6px;border:1px solid #d4d4d8;border-radius:8px;background:#fff;color:#27272a;font-size:16px;cursor:pointer}
+.choice.right{background:#d1fae5;border-color:#059669}
+.choice.wrong{background:#ffe4e6;border-color:#e11d48}
+.choice:disabled{color:#27272a}
+
+/* jantung */
+.heartbox{background:#1e293b;border-radius:12px;padding:10px;text-align:center}
+.heartbox svg{width:100%;max-width:340px;height:auto}
+.part{cursor:pointer}
+.hbtns{display:flex;flex-wrap:wrap;margin:8px -3px 0}
+.hbtns button{flex:1 1 45%;margin:3px;min-height:44px;border:1px solid #d4d4d8;border-radius:8px;background:#fff;font-size:14px;font-weight:bold;color:#27272a;cursor:pointer}
+.hbtns button.on{border-color:#be123c;background:#ffe4e6}
+.tagO{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:bold}
+.tagO.o2{background:#ffe4e6;color:#9f1239}
+.tagO.co2{background:#e0f2fe;color:#075985}
+.infopanel{background:#f4f4f5;border:1px solid #e4e4e7;border-radius:12px;padding:14px;min-height:150px}
+
+/* tabel (jadi kartu di layar kecil) */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{padding:8px;border-bottom:1px solid #e4e4e7;text-align:left;vertical-align:top;font-size:14px}
+.tbl th{background:#f4f4f5}
+.tbl td.rh{font-weight:bold}
+@media (max-width:640px){
+ .tbl thead{display:none}
+ .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+ .tbl tr{border:1px solid #e4e4e7;border-radius:10px;margin-bottom:10px;padding:4px;background:#fff}
+ .tbl td{border:0;padding:6px 8px;font-size:15px}
+ .tbl td:before{content:attr(data-label);display:block;font-size:12px;font-weight:bold;color:#71717a}
+ .tbl td.rh{font-size:16px;background:#f4f4f5;border-radius:6px}
+}
+
+/* simulasi 1 */
+.pool button,.pathitem{display:block;width:100%;text-align:left;min-height:44px;padding:10px 12px;margin-bottom:8px;border-radius:8px;font-size:16px}
+.pool button{border:1px solid #d4d4d8;background:#fff;color:#27272a;cursor:pointer}
+.pool button:disabled{background:#e4e4e7;color:#71717a}
+.pool .ox,.pathitem .ox{float:right;font-size:12px;font-weight:bold;color:#71717a;margin-left:8px}
+.pathitem{background:#fff1f2;border:1px solid #fda4af;color:#881337;font-weight:bold}
+.pathbox{background:#fff;border:1px solid #fecdd3;border-radius:10px;padding:8px;min-height:120px}
+.num{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:#be123c;color:#fff;font-size:12px;margin-right:8px}
+
+/* simulasi 2 */
+.lab{background:#0f172a;color:#fff;border-radius:12px;padding:14px}
+.lab h4{color:#fda4af}
+.wells{display:flex;flex-wrap:wrap;margin:0 -4px}
+.wcell{flex:1 1 30%;min-width:96px;margin:4px;padding:10px 6px;background:#1e293b;border:1px solid #334155;border-radius:10px;text-align:center}
+.wcell .wt{font-weight:bold;font-size:14px;margin-bottom:8px}
+.well{width:72px;height:72px;margin:0 auto 6px;border-radius:50%;background:#be123c;border:3px solid #fecdd3}
+.well.clump{background-color:#881337;background-image:radial-gradient(#4c0519 30%,transparent 32%),radial-gradient(#be123c 30%,transparent 32%);background-size:14px 14px;background-position:0 0,7px 7px;border-color:#fbbf24}
+.well.smooth{border-color:#34d399}
+.wlabel{font-size:14px;font-weight:bold;min-height:22px;margin-bottom:6px}
+.wcell .btn{margin:0;width:100%;padding:8px 4px;font-size:14px;background:#0369a1}
+.wcell .btn:disabled{background:#475569}
+
+/* game */
+.dark{background:#0f172a;color:#fff;border-radius:14px;padding:16px}
+.dark h2{color:#fda4af}
+.dark label{color:#e2e8f0}
+.hud{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:8px 10px;margin-bottom:12px;font-size:14px}
+.hud div{margin:2px 6px 2px 0}
+.hud b{color:#fda4af}
+.qcard{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:14px}
+.qcard h3{border:0;padding:0;font-size:18px;line-height:1.5;color:#fff;margin:6px 0 12px}
+.gopt{display:block;width:100%;text-align:left;min-height:48px;padding:10px 12px;margin-bottom:8px;border-radius:10px;border:1px solid #475569;background:#334155;color:#fff;font-size:16px;cursor:pointer}
+.gopt .ltr{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;border-radius:6px;background:#0f172a;color:#fda4af;font-weight:bold;font-size:13px;margin-right:8px}
+.gopt.ok{background:#047857;border-color:#34d399}
+.gopt.bad{background:#b91c1c;border-color:#fca5a5}
+.gopt:disabled{color:#fff}
+.gopt .mk{float:right;font-weight:bold;font-size:13px;margin-left:8px}
+.heros{display:flex;margin:0 -4px}
+.heros button{flex:1 1 33%;margin:4px;min-height:48px;padding:6px 4px;border-radius:10px;border:2px solid #475569;background:#1e293b;color:#fff;font-size:14px;font-weight:bold;cursor:pointer}
+.heros button.sel{border-color:#fb7185;background:#4c0519}
+.toast{background:#1e293b;border:1px solid #475569;border-radius:12px;padding:14px;margin-top:12px}
+.toast .tt{font-weight:bold;font-size:17px;margin-bottom:6px}
+.toast .ok{color:#6ee7b7}.toast .no{color:#fda4af}
+.reslist{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:12px;text-align:left}
+.reslist div{padding:6px 0;border-bottom:1px solid #334155}
+.reslist div:last-child{border:0}
+.dark .txt{color:#cbd5e1}
+.stat{flex:1 1 40%;margin:4px;padding:12px;text-align:center;background:#fafafa;border:1px solid #e4e4e7;border-radius:10px}
+.stat span{display:block;font-size:13px;color:#52525b}
+.stat b{display:block;font-size:19px;margin-top:2px}
+.stats{display:flex;flex-wrap:wrap;margin:0 -4px 10px}
+textarea.copybox{min-height:120px;font-size:14px}
+.foot{background:#27272a;color:#d4d4d8;font-size:14px;text-align:center;padding:16px 12px;margin-top:10px}
+.foot p{margin:2px 0}
+button:focus,select:focus,input:focus,textarea:focus{outline:3px solid #fbbf24;outline-offset:1px}
+@media (min-width:700px){
+ .top h1{font-size:22px}
+ .tab-btn{flex:1 1 0;font-size:15px}
+ .sub button{flex:1 1 0}
+}
+</style>
+</head>
+<body>
+<noscript><div class="wrap"><div class="fb warn">Halaman ini membutuhkan JavaScript. Mohon aktifkan JavaScript di peramban (browser) HP kamu.</div></div></noscript>
+
+<header class="top">
+ <div class="in">
+  <h1>RPM Interaktif Biologi XII</h1>
+  <p>Sistem Peredaran Darah dan Penggolongan Darah (ABO dan Rhesus)</p>
+  <div class="tabs">
+   <button class="tab-btn on" id="tab-beranda" onclick="switchTab('beranda')">Beranda</button>
+   <button class="tab-btn" id="tab-materi" onclick="switchTab('materi')">Materi dan Simulasi</button>
+   <button class="tab-btn" id="tab-lkpd" onclick="switchTab('lkpd')">LKPD Kelompok</button>
+   <button class="tab-btn" id="tab-game" onclick="switchTab('game')">Game Biology Hero</button>
+   <button class="tab-btn" id="tab-rekap" onclick="switchTab('rekap')">Asesmen dan Rekap</button>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= BERANDA ================= -->
+<section id="sec-beranda" class="tab-content">
+
+ <div class="banner">
+  <span class="pill">Fase F / Kelas XII</span>
+  <h2>Belajar Peredaran Darah dan Golongan Darah</h2>
+  <p>Media ini dibuat supaya belajar Biologi di jam pelajaran terakhir tetap seru dan mudah dipahami. Kamu akan membaca materi singkat, mencoba simulasi, mengerjakan LKPD bersama kelompok, lalu menguji kemampuanmu lewat game.</p>
+  <button class="btn" onclick="switchTab('materi')">Mulai Belajar</button>
+  <button class="btn alt" onclick="switchTab('game')">Main Game Biology Hero</button>
+ </div>
+
+ <div class="card">
+  <h3>Cara Memakai Media Ini</h3>
+  <ol class="guide">
+   <li>Kerjakan <b>Tes Awal</b> di bagian bawah halaman ini.</li>
+   <li>Buka tab <b>Materi dan Simulasi</b>, baca materinya, lalu coba kedua simulasi.</li>
+   <li>Kerjakan <b>LKPD</b> bersama kelompokmu.</li>
+   <li>Mainkan <b>Game Biology Hero</b> untuk menguji pemahamanmu.</li>
+   <li>Lihat hasilmu di tab <b>Asesmen dan Rekap</b>, lalu salin dan kirim ke gurumu.</li>
+  </ol>
+ </div>
+
+ <div class="row">
+  <div class="col">
+   <div class="card" style="margin-bottom:0">
+    <h3>Identitas Pembelajaran</h3>
+    <ul class="idl">
+     <li><span>Mata pelajaran</span><b>Biologi SMA</b></li>
+     <li><span>Fase / Kelas</span><b>F / XII (dua belas)</b></li>
+     <li><span>Guru pengampu</span><b>Megawati Ciptaning, S.Si., M.Pd.</b></li>
+     <li><span>Alokasi waktu</span><b>3 x 45 menit (135 menit)</b></li>
+     <li><span>Dimensi profil lulusan</span>
+      <b>Penalaran Kritis, Kolaborasi, Komunikasi</b></li>
+    </ul>
+   </div>
+  </div>
+  <div class="col">
+   <div class="card" style="margin-bottom:0">
+    <h3>Tujuan Pembelajaran</h3>
+    <p class="small">Setelah pembelajaran ini, kamu diharapkan mampu:</p>
+    <ul class="plain">
+     <li>Menjelaskan komponen darah beserta fungsinya.</li>
+     <li>Menjelaskan bagian-bagian jantung dan membedakan arteri, vena, dan kapiler.</li>
+     <li>Menyusun jalur peredaran darah kecil dan besar dengan urutan yang benar.</li>
+     <li>Menentukan golongan darah ABO dan Rhesus melalui uji serum, lalu menganalisis kecocokan transfusi darah.</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+ <div class="card" style="margin-top:14px">
+  <h3>Alur Pembelajaran (135 Menit)</h3>
+  <div class="step"><div class="mn">10 mnt</div><div><span class="tag">Awal</span><h4>Pembukaan dan Tes Awal</h4><p>Apersepsi, penyampaian tujuan, dan tes awal 4 soal.</p></div></div>
+  <div class="step"><div class="mn">25 mnt</div><div><span class="tag">Memahami</span><h4>Eksplorasi Peredaran Darah</h4><p>Mempelajari komponen darah, bagian jantung, dan jenis pembuluh darah.</p></div></div>
+  <div class="step"><div class="mn">20 mnt</div><div><span class="tag">Mengaplikasi</span><h4>Simulasi 1 dan LKPD Misi 1</h4><p>Menyusun jalur peredaran darah lewat simulasi "Perjalanan Setetes Darah".</p></div></div>
+  <div class="step"><div class="mn">25 mnt</div><div><span class="tag">Memahami dan mengaplikasi</span><h4>Golongan Darah dan Lab Serum</h4><p>Mempelajari sistem ABO dan Rhesus, lalu mencoba uji serum di Simulasi 2.</p></div></div>
+  <div class="step"><div class="mn">40 mnt</div><div><span class="tag">Mengaplikasi</span><h4>Game Biology Hero dan LKPD Misi 2</h4><p>Menyelamatkan pasien gawat darurat lewat game, dan menganalisis kasus transfusi bersama kelompok.</p></div></div>
+  <div class="step" style="margin-bottom:0"><div class="mn">15 mnt</div><div><span class="tag">Merefleksi</span><h4>Refleksi dan Rekap</h4><p>Berbagi kesimpulan, memberi umpan balik, dan melihat rekap nilai.</p></div></div>
+ </div>
+
+ <div class="card">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center">
+   <h3 style="border:0;margin:0;padding:0">Tes Awal (4 Soal Singkat)</h3>
+   <span id="diag-score-badge" class="pill hid" style="background:#d1fae5;color:#065f46;margin:0">Skor: 0 / 4</span>
+  </div>
+  <p class="small" style="margin-top:6px">Tes ini untuk mengetahui pemahamanmu sebelum belajar. Pilih satu jawaban untuk setiap soal.</p>
+  <div id="diag-list"></div>
+  <button class="btn alt" onclick="resetDiag()">Ulangi Tes Awal</button>
+ </div>
+</section>
+
+<!-- ================= MATERI ================= -->
+<section id="sec-materi" class="tab-content hid">
+ <div class="sub">
+  <button class="submateri-btn on" id="subtab-materi1" onclick="switchMateriSub('materi1')">Modul 1: Peredaran Darah</button>
+  <button class="submateri-btn" id="subtab-simulasi1" onclick="switchMateriSub('simulasi1')">Simulasi 1: Setetes Darah</button>
+  <button class="submateri-btn" id="subtab-materi2" onclick="switchMateriSub('materi2')">Modul 2: Golongan Darah</button>
+  <button class="submateri-btn" id="subtab-simulasi2" onclick="switchMateriSub('simulasi2')">Simulasi 2: Lab Serum</button>
+ </div>
+
+ <!-- Modul 1 -->
+ <div id="subcontent-materi1" class="subcontent-materi">
+  <div class="card">
+   <h3>Komponen Penyusun Darah</h3>
+   <p>Darah terdiri atas bagian cair yang disebut <b>plasma darah</b> (sekitar 55%) dan bagian padat berupa <b>sel-sel darah</b> (sekitar 45%). Setiap bagian punya tugas masing-masing untuk menjaga kondisi tubuh tetap stabil (homeostasis).</p>
+   <div class="box c-amber"><h4>Plasma darah (55%)</h4><p>Cairan berwarna kekuningan. Sekitar 90% isinya air. Plasma juga mengandung protein (albumin, globulin, fibrinogen), hormon, dan zat makanan.</p></div>
+   <div class="box c-rose"><h4>Eritrosit (sel darah merah)</h4><p>Bentuknya cakram yang cekung di kedua sisi (bikonkaf) dan tidak punya inti sel. Kaya <b>hemoglobin (Hb)</b>. Tugasnya mengikat O<sub>2</sub> dari paru-paru lalu mengantarnya ke seluruh jaringan tubuh.</p></div>
+   <div class="box c-sky"><h4>Leukosit (sel darah putih)</h4><p>Punya inti sel dan bentuknya beragam. Tugasnya melindungi tubuh dari kuman dan penyakit (sistem pertahanan tubuh).</p></div>
+   <div class="box c-violet" style="margin-bottom:0"><h4>Trombosit (keping darah)</h4><p>Pecahan sel yang tidak punya inti. Trombosit berperan penting dalam <b>pembekuan darah</b> ketika terjadi luka.</p></div>
+  </div>
+
+  <div class="card">
+   <h3>Bagian-Bagian Jantung</h3>
+   <p>Ketuk salah satu bagian jantung pada gambar, atau pilih tombol di bawahnya, untuk membaca penjelasannya.</p>
+   <div class="row">
+    <div class="col">
+     <div class="heartbox">
+      <svg viewBox="0 0 320 276" role="img" aria-label="Gambar sederhana jantung dengan empat ruang dan aorta">
+       <g class="part" onclick="showHeartDetail('aorta')"><rect id="p-aorta" x="108" y="6" width="104" height="48" rx="24" fill="#b45309" stroke="#1e293b" stroke-width="4"/><text x="160" y="36" fill="#fff" font-size="17" font-weight="bold" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">Aorta</text></g>
+       <g class="part" onclick="showHeartDetail('ra')"><rect id="p-ra" x="14" y="64" width="140" height="76" rx="26" fill="#1d6fa5" stroke="#1e293b" stroke-width="4"/><text x="84" y="96" fill="#fff" font-size="16" font-weight="bold" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">Serambi Kanan</text><text x="84" y="118" fill="#e0f2fe" font-size="13" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">kaya CO2</text></g>
+       <g class="part" onclick="showHeartDetail('la')"><rect id="p-la" x="166" y="64" width="140" height="76" rx="26" fill="#e11d48" stroke="#1e293b" stroke-width="4"/><text x="236" y="96" fill="#fff" font-size="16" font-weight="bold" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">Serambi Kiri</text><text x="236" y="118" fill="#ffe4e6" font-size="13" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">kaya O2</text></g>
+       <g class="part" onclick="showHeartDetail('rv')"><rect id="p-rv" x="14" y="150" width="140" height="110" rx="30" fill="#155e8c" stroke="#1e293b" stroke-width="4"/><text x="84" y="200" fill="#fff" font-size="16" font-weight="bold" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">Bilik Kanan</text><text x="84" y="222" fill="#e0f2fe" font-size="13" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">kaya CO2</text></g>
+       <g class="part" onclick="showHeartDetail('lv')"><rect id="p-lv" x="166" y="150" width="140" height="110" rx="30" fill="#9f1239" stroke="#1e293b" stroke-width="4"/><text x="236" y="200" fill="#fff" font-size="16" font-weight="bold" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">Bilik Kiri</text><text x="236" y="222" fill="#ffe4e6" font-size="13" font-family="Arial,sans-serif" text-anchor="middle" pointer-events="none">kaya O2</text></g>
+      </svg>
+      <p class="small" style="color:#cbd5e1;margin:6px 0 0">Gambar dilihat dari depan, jadi sisi kanan jantung ada di sebelah kiri gambar. Biru: darah kaya CO<sub>2</sub>. Merah: darah kaya O<sub>2</sub>.</p>
+     </div>
+     <div class="hbtns">
+      <button id="hb-ra" onclick="showHeartDetail('ra')">Serambi Kanan</button>
+      <button id="hb-la" onclick="showHeartDetail('la')">Serambi Kiri</button>
+      <button id="hb-rv" onclick="showHeartDetail('rv')">Bilik Kanan</button>
+      <button id="hb-lv" onclick="showHeartDetail('lv')">Bilik Kiri</button>
+      <button id="hb-aorta" onclick="showHeartDetail('aorta')">Aorta</button>
+     </div>
+    </div>
+    <div class="col">
+     <div class="infopanel">
+      <div id="heart-info-default">
+       <h4>Pilih satu bagian jantung</h4>
+       <p class="small">Setelah dipilih, kamu akan melihat nama bagian, kandungan gas dalam darahnya, fungsinya, dan satu fakta penting.</p>
+      </div>
+      <div id="heart-info-detail" class="hid">
+       <h4 id="heart-title"></h4>
+       <p><span id="heart-oxygen" class="tagO"></span></p>
+       <p id="heart-desc"></p>
+       <div class="fb info" style="margin-top:0"><b>Fakta penting:</b> <span id="heart-fact"></span></div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <h3>Membandingkan Arteri, Vena, dan Kapiler</h3>
+   <table class="tbl">
+    <thead><tr><th>Pembeda</th><th>Arteri (pembuluh nadi)</th><th>Vena (pembuluh balik)</th><th>Kapiler</th></tr></thead>
+    <tbody>
+     <tr><td class="rh" data-label="Pembeda">Arah aliran</td><td data-label="Arteri">Membawa darah keluar dari jantung</td><td data-label="Vena">Membawa darah menuju jantung</td><td data-label="Kapiler">Menghubungkan arteri dan vena, dekat dengan sel-sel tubuh</td></tr>
+     <tr><td class="rh" data-label="Pembeda">Dinding pembuluh</td><td data-label="Arteri">Tebal, elastis, dan kuat</td><td data-label="Vena">Tipis dan kurang elastis</td><td data-label="Kapiler">Sangat tipis (setebal satu lapis sel)</td></tr>
+     <tr><td class="rh" data-label="Pembeda">Kandungan darah</td><td data-label="Arteri">Kaya O<sub>2</sub> (kecuali arteri pulmonalis)</td><td data-label="Vena">Kaya CO<sub>2</sub> (kecuali vena pulmonalis)</td><td data-label="Kapiler">Tempat pertukaran O<sub>2</sub> dan CO<sub>2</sub></td></tr>
+     <tr><td class="rh" data-label="Pembeda">Katup</td><td data-label="Arteri">Hanya di pangkal arteri (katup semilunar)</td><td data-label="Vena">Banyak di sepanjang pembuluh</td><td data-label="Kapiler">Tidak ada</td></tr>
+     <tr><td class="rh" data-label="Pembeda">Tekanan dan aliran</td><td data-label="Arteri">Kuat, darah memancar jika terluka</td><td data-label="Vena">Lemah, darah menetes jika terluka</td><td data-label="Kapiler">Sangat lambat</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+
+ <!-- Simulasi 1 -->
+ <div id="subcontent-simulasi1" class="subcontent-materi hid">
+  <div class="card">
+   <h3>Simulasi 1: Perjalanan Setetes Darah</h3>
+   <p>Susun urutan perjalanan darah dengan benar. Pilih jalur yang ingin kamu coba:</p>
+   <button class="btn" id="btn-pulmonalis" onclick="setSimType('pulmonalis')">Peredaran Darah Kecil</button>
+   <button class="btn alt" id="btn-sistemik" onclick="setSimType('sistemik')">Peredaran Darah Besar</button>
+
+   <div class="row" style="margin-top:8px">
+    <div class="col">
+     <h4>1. Ketuk bagian sesuai urutan</h4>
+     <div id="sim1-options" class="pool"></div>
+    </div>
+    <div class="col">
+     <h4>2. Urutan jalur darahmu</h4>
+     <div id="sim1-user-path" class="pathbox"></div>
+     <div style="margin-top:10px">
+      <button class="btn alt" onclick="undoSim1()">Hapus Langkah Terakhir</button>
+      <button class="btn alt" onclick="resetSim1()">Ulangi</button>
+      <button class="btn" onclick="validateSim1()">Periksa Jawaban</button>
+     </div>
+    </div>
+   </div>
+   <div id="sim1-feedback" class="fb hid"></div>
+  </div>
+ </div>
+
+ <!-- Modul 2 -->
+ <div id="subcontent-materi2" class="subcontent-materi hid">
+  <div class="card">
+   <h3>Golongan Darah Sistem ABO</h3>
+   <p>Sistem ABO ditemukan oleh <b>Karl Landsteiner</b>. Penggolongannya didasarkan pada dua hal: <b>aglutinogen (antigen)</b> di permukaan sel darah merah dan <b>aglutinin (antibodi)</b> di plasma darah.</p>
+   <div class="box c-rose"><h4>Aglutinogen (antigen)</h4><p>Zat (glikoprotein atau glikolipid) yang menempel di permukaan sel darah merah. Zat inilah yang menentukan nama golongan darah, yaitu antigen A atau antigen B.</p></div>
+   <div class="box c-sky"><h4>Aglutinin (antibodi)</h4><p>Antibodi yang larut dalam plasma darah. Aglutinin akan menggumpalkan (aglutinasi) sel darah yang punya antigen asing, yaitu antigen yang tidak cocok dengan dirinya.</p></div>
+
+   <table class="tbl" style="margin-top:12px">
+    <thead><tr><th>Golongan darah</th><th>Antigen di sel darah merah</th><th>Antibodi di plasma</th><th>Dapat menerima dari</th><th>Dapat mendonorkan ke</th></tr></thead>
+    <tbody>
+     <tr><td class="rh" data-label="Golongan darah" style="color:#be123c">Golongan A</td><td data-label="Antigen">Antigen A</td><td data-label="Antibodi">Anti-B (&beta;)</td><td data-label="Dapat menerima dari">A, O</td><td data-label="Dapat mendonorkan ke">A, AB</td></tr>
+     <tr><td class="rh" data-label="Golongan darah" style="color:#0369a1">Golongan B</td><td data-label="Antigen">Antigen B</td><td data-label="Antibodi">Anti-A (&alpha;)</td><td data-label="Dapat menerima dari">B, O</td><td data-label="Dapat mendonorkan ke">B, AB</td></tr>
+     <tr><td class="rh" data-label="Golongan darah" style="color:#6d28d9">Golongan AB</td><td data-label="Antigen">Antigen A dan B</td><td data-label="Antibodi">Tidak ada</td><td data-label="Dapat menerima dari"><b style="color:#047857">Semua golongan (resipien universal)</b></td><td data-label="Dapat mendonorkan ke">Hanya AB</td></tr>
+     <tr><td class="rh" data-label="Golongan darah" style="color:#b45309">Golongan O</td><td data-label="Antigen">Tidak ada</td><td data-label="Antibodi">Anti-A dan Anti-B</td><td data-label="Dapat menerima dari">Hanya O</td><td data-label="Dapat mendonorkan ke"><b style="color:#047857">Semua golongan (donor universal)</b></td></tr>
+    </tbody>
+   </table>
+  </div>
+
+  <div class="card">
+   <h3>Faktor Rhesus (Rh)</h3>
+   <p>Selain antigen A dan B, sel darah merah dapat memiliki antigen lain yang disebut <b>antigen D</b> atau faktor Rhesus.</p>
+   <ul class="plain">
+    <li>Punya antigen D: Rhesus positif (Rh+).</li>
+    <li>Tidak punya antigen D: Rhesus negatif (Rh-).</li>
+    <li>Orang Rh- tidak otomatis punya antibodi anti-Rh. Antibodi itu baru dibentuk setelah tubuhnya terpapar darah Rh+, misalnya lewat transfusi atau kehamilan.</li>
+   </ul>
+   <div class="box c-amber" style="margin-top:10px;margin-bottom:0"><h4>Eritroblastosis fetalis</h4><p>Kondisi ini bisa terjadi jika seorang ibu Rh- mengandung janin Rh+. Pada kehamilan berikutnya, antibodi anti-Rh dari ibu dapat menembus plasenta dan merusak sel darah merah janin.</p></div>
+  </div>
+
+  <div class="card c-amber" style="margin-bottom:0">
+   <h4>Catatan penting tentang transfusi</h4>
+   <p style="margin:0">Secara teori, golongan O- disebut donor universal dan AB+ disebut resipien universal. Namun di rumah sakit, transfusi sebaiknya memakai golongan darah yang sama persis, dan selalu didahului <b>uji silang serasi (crossmatching)</b> oleh tenaga medis agar tidak terjadi reaksi hemolisis yang berbahaya.</p>
+  </div>
+ </div>
+
+ <!-- Simulasi 2 -->
+ <div id="subcontent-simulasi2" class="subcontent-materi hid">
+  <div class="card">
+   <h3>Simulasi 2: Lab Uji Golongan Darah</h3>
+   <p>Uji darah pasien dengan meneteskan serum Anti-A, Anti-B, dan Anti-D (Rhesus). Amati apakah darahnya menggumpal, lalu tentukan golongan darahnya.</p>
+
+   <label for="sim2-patient-select">1. Pilih pasien</label>
+   <select id="sim2-patient-select" onchange="loadPatientLab()">
+    <option value="1">Pasien 1 - Tn. Budi (korban kecelakaan)</option>
+    <option value="2">Pasien 2 - Ny. Siti (akan dioperasi)</option>
+    <option value="3">Pasien 3 - An. Doni (anemia berat)</option>
+    <option value="4">Pasien 4 - Tn. Andi (calon pendonor)</option>
+   </select>
+
+   <div class="fb info"><b>Petunjuk membaca hasil:</b><br>Menggumpal (aglutinasi) berarti antigen yang cocok ada di sel darah. Tidak menggumpal berarti antigen itu tidak ada. Anti-D menggumpal berarti darahnya Rh positif.</div>
+
+   <div class="lab" style="margin-top:12px">
+    <h4>2. Teteskan ketiga serum</h4>
+    <div class="wells">
+     <div class="wcell"><div class="wt" style="color:#7dd3fc">Anti-A</div><div id="well-a" class="well"></div><div id="wl-a" class="wlabel">Belum diuji</div><button id="drop-a" class="btn" onclick="dropSerum('A')">Teteskan</button></div>
+     <div class="wcell"><div class="wt" style="color:#fcd34d">Anti-B</div><div id="well-b" class="well"></div><div id="wl-b" class="wlabel">Belum diuji</div><button id="drop-b" class="btn" onclick="dropSerum('B')">Teteskan</button></div>
+     <div class="wcell"><div class="wt" style="color:#6ee7b7">Anti-D (Rh)</div><div id="well-d" class="well"></div><div id="wl-d" class="wlabel">Belum diuji</div><button id="drop-d" class="btn" onclick="dropSerum('D')">Teteskan</button></div>
+    </div>
+   </div>
+
+   <label for="sim2-user-deduction">3. Pilih golongan darah pasien</label>
+   <select id="sim2-user-deduction">
+    <option value="">-- Pilih golongan darah --</option>
+    <option value="A+">A positif (A+)</option>
+    <option value="A-">A negatif (A-)</option>
+    <option value="B+">B positif (B+)</option>
+    <option value="B-">B negatif (B-)</option>
+    <option value="AB+">AB positif (AB+)</option>
+    <option value="AB-">AB negatif (AB-)</option>
+    <option value="O+">O positif (O+)</option>
+    <option value="O-">O negatif (O-)</option>
+   </select>
+   <div style="margin-top:10px"><button class="btn" onclick="verifyLabResult()">Periksa Jawaban</button></div>
+   <div id="sim2-feedback" class="fb hid"></div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= LKPD ================= -->
+<section id="sec-lkpd" class="tab-content hid">
+ <div class="card">
+  <span class="pill">Lembar Kerja Peserta Didik (LKPD)</span>
+  <h2>Tantangan Analisis Kelompok</h2>
+  <p class="small">Diskusikan jawabannya bersama kelompokmu, lalu isi satu lembar untuk satu kelompok.</p>
+
+  <div class="card" style="background:#fafafa">
+   <h3>Misi 1: Susun Jalur Peredaran Darah Besar</h3>
+   <p>Pilih urutan bagian yang benar, dari awal sampai akhir. Setiap bagian hanya dipakai satu kali.</p>
+   <div id="lkpd-steps"></div>
+   <div id="lkpd-m1-fb" class="fb hid"></div>
+  </div>
+
+  <div class="card" style="background:#fafafa">
+   <h3>Misi 2: Analisis Kasus Transfusi Darah</h3>
+   <h4>Kasus A: Pasien Rina (golongan darah B+)</h4>
+   <p>Rina membutuhkan transfusi 500 mL darah. Stok kantong darah di PMI setempat adalah A+, B-, dan AB+. Kantong darah mana yang paling aman untuk Rina?</p>
+   <select id="lkpd-m2-a">
+    <option value="">-- Pilih jawaban kelompok --</option>
+    <option value="A+">Kantong A+</option>
+    <option value="B-">Kantong B-</option>
+    <option value="AB+">Kantong AB+</option>
+   </select>
+   <div id="lkpd-m2a-fb" class="fb hid"></div>
+
+   <h4 style="margin-top:16px">Kasus B: Mengapa golongan O- disebut donor universal?</h4>
+   <textarea id="lkpd-m2-b" rows="4" placeholder="Tulis alasan kelompokmu. Petunjuk: perhatikan antigen A, antigen B, dan antigen Rh pada sel darah merah golongan O-."></textarea>
+   <div id="lkpd-m2b-fb" class="fb hid"></div>
+  </div>
+
+  <button class="btn" onclick="checkLKPD()">Kirim dan Periksa Jawaban</button>
+  <div id="lkpd-status" class="fb info">Status: belum diperiksa</div>
+
+  <div style="margin-top:14px">
+   <button class="btn alt" onclick="toggleTeacherKey()"><span id="key-btn-text">Tampilkan Kunci Pembahasan (Guru)</span></button>
+  </div>
+  <div id="teacher-key-panel" class="fb warn hid">
+   <p><b>Kunci pembahasan (khusus guru dan diskusi kelas)</b></p>
+   <p><b>Misi 1:</b> Bilik Kiri, Aorta, Jaringan Tubuh, Vena Cava, Serambi Kanan.</p>
+   <p><b>Misi 2, Kasus A:</b> Kantong B- paling aman. Plasma Rina mengandung antibodi anti-A, jadi kantong A+ dan AB+ (yang punya antigen A) akan digumpalkan. Kantong B- hanya punya antigen B (sama seperti Rina) dan tidak punya antigen Rh, sehingga tidak ada yang diserang antibodi Rina.</p>
+   <p style="margin:0"><b>Misi 2, Kasus B:</b> Sel darah merah golongan O- tidak punya antigen A, antigen B, maupun antigen Rh. Karena tidak ada antigen asing, sel darah ini tidak digumpalkan oleh antibodi di plasma penerima. Kasus B dinilai oleh guru.</p>
+  </div>
+ </div>
+</section>
+
+<!-- ================= GAME ================= -->
+<section id="sec-game" class="tab-content hid">
+ <div class="dark">
+
+  <div id="game-screen-reg">
+   <h2 style="text-align:center;margin-bottom:2px">BIOLOGY HERO</h2>
+   <p class="txt" style="text-align:center">Misi menyelamatkan pasien gawat darurat</p>
+   <div class="fb info" style="margin-bottom:12px">Ada <b id="game-total">12</b> soal. Kamu punya 3 nyawa. Setiap soal dibatasi 30 detik. Makin cepat menjawab dengan benar, makin banyak poinmu.</div>
+   <label for="game-player-name">Nama kamu</label>
+   <input type="text" id="game-player-name" placeholder="Tulis nama lengkap" maxlength="40" autocomplete="off">
+   <label>Pilih karakter hero</label>
+   <div class="heros">
+    <button class="hero-btn sel" onclick="selectHero('Dr. Hemato',this)">Dr. Hemato</button>
+    <button class="hero-btn" onclick="selectHero('Capt. Eritro',this)">Capt. Eritro</button>
+    <button class="hero-btn" onclick="selectHero('Bio-Knight',this)">Bio-Knight</button>
+   </div>
+   <div id="game-reg-msg" class="fb warn hid"></div>
+   <div style="margin-top:14px"><button class="btn" style="width:100%" onclick="startGame()">Mulai Misi</button></div>
+  </div>
+
+  <div id="game-screen-play" class="hid">
+   <div class="hud">
+    <div><b id="game-hud-name">Bio-Hero</b><br><span id="game-hud-level" class="small" style="color:#fda4af">Level 1</span></div>
+    <div>Nyawa: <b id="game-hud-lives">3</b></div>
+    <div>Waktu: <b id="game-hud-timer">30</b> detik</div>
+    <div>Skor: <b id="game-hud-score">0</b></div>
+   </div>
+   <div class="qcard">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;font-size:13px">
+     <b id="game-q-number" style="color:#fda4af">Soal 1</b>
+     <span id="game-q-badge" class="txt">C2</span>
+    </div>
+    <h3 id="game-q-text">Memuat soal...</h3>
+    <div id="game-options-container"></div>
+   </div>
+   <div id="game-explanation-toast" class="toast hid">
+    <div class="tt" id="game-toast-title"></div>
+    <p id="game-toast-body" class="txt"></p>
+    <button class="btn" id="game-next-btn" onclick="nextQuestion()">Soal Berikutnya</button>
+   </div>
+  </div>
+
+  <div id="game-screen-result" class="hid">
+   <h2 style="text-align:center;margin-bottom:2px">HASIL MISI</h2>
+   <p id="game-res-badge" style="text-align:center;font-weight:bold;color:#fcd34d">Master Bio-Hero</p>
+   <div class="reslist">
+    <div>Nama: <b id="game-res-name"></b></div>
+    <div>Skor akhir: <b id="game-res-score" style="color:#fda4af"></b></div>
+    <div>Ketepatan jawaban: <b id="game-res-accuracy" style="color:#6ee7b7"></b></div>
+    <div><b>Saran belajar:</b><br><span id="game-res-recom" class="txt"></span></div>
+   </div>
+   <div style="margin-top:12px">
+    <button class="btn alt" onclick="resetGame()">Main Lagi</button>
+    <button class="btn" onclick="copyGameResult()">Salin Hasil</button>
+   </div>
+   <div id="game-copy-msg" class="fb hid"></div>
+   <textarea id="game-copy-box" class="copybox hid" readonly></textarea>
+  </div>
+
+ </div>
+</section>
+
+<!-- ================= REKAP ================= -->
+<section id="sec-rekap" class="tab-content hid">
+ <div class="card">
+  <h3>Rubrik Penilaian (Skala 1 sampai 4)</h3>
+  <table class="tbl">
+   <thead><tr><th>Dimensi</th><th>Skor 1 (perlu bimbingan)</th><th>Skor 2 (cukup)</th><th>Skor 3 (baik)</th><th>Skor 4 (sangat baik)</th></tr></thead>
+   <tbody>
+    <tr><td class="rh" data-label="Dimensi">Penalaran Kritis</td><td data-label="Skor 1">Masih sulit menganalisis kecocokan transfusi ABO dan Rh.</td><td data-label="Skor 2">Memahami dasar ABO, tetapi belum memahami Rhesus.</td><td data-label="Skor 3">Mampu menganalisis kasus transfusi dengan tepat.</td><td data-label="Skor 4"><b>Mampu menganalisis kasus yang rumit dan menjelaskannya secara ilmiah dan mendalam.</b></td></tr>
+    <tr><td class="rh" data-label="Dimensi">Kolaborasi</td><td data-label="Skor 1">Pasif saat diskusi kelompok LKPD.</td><td data-label="Skor 2">Aktif jika diminta teman sekelompok.</td><td data-label="Skor 3">Aktif membagi tugas dalam menyusun jalur peredaran darah.</td><td data-label="Skor 4"><b>Memimpin diskusi, menghargai pendapat, dan membantu teman.</b></td></tr>
+    <tr><td class="rh" data-label="Dimensi">Komunikasi</td><td data-label="Skor 1">Belum mampu menyampaikan hasil LKPD.</td><td data-label="Skor 2">Menyampaikan hasil secara singkat, tanpa alasan yang jelas.</td><td data-label="Skor 3">Menyampaikan pendapat dengan runtut dan jelas.</td><td data-label="Skor 4"><b>Menyampaikan kesimpulan kelompok dengan jelas, ilmiah, dan percaya diri.</b></td></tr>
+   </tbody>
+  </table>
+ </div>
+
+ <div class="card">
+  <h3>Rekap Belajar Hari Ini</h3>
+  <label for="rekap-name">Nama siswa</label>
+  <input type="text" id="rekap-name" placeholder="Tulis nama lengkap" maxlength="40" autocomplete="off">
+  <div class="stats" style="margin-top:12px">
+   <div class="stat"><span>Tes Awal</span><b id="rekap-diag">Belum</b></div>
+   <div class="stat"><span>Simulasi 1</span><b id="rekap-sim1">Belum</b></div>
+   <div class="stat"><span>Simulasi 2</span><b id="rekap-sim2">Belum</b></div>
+   <div class="stat"><span>LKPD</span><b id="rekap-lkpd">Belum</b></div>
+   <div class="stat"><span>Game Biology Hero</span><b id="rekap-game" style="color:#be123c">Belum</b></div>
+  </div>
+  <button class="btn" onclick="copyFullSummary()">Salin Rekap</button>
+  <div id="rekap-copy-msg" class="fb hid"></div>
+  <textarea id="rekap-copy-box" class="copybox hid" readonly></textarea>
+
+  <div class="fb info" style="margin-top:12px"><b>Catatan guru:</b> Media ini memuat asesmen diagnostik (tes awal), asesmen formatif (simulasi dan LKPD), dan asesmen sumatif (game). Hasil rekap dapat menjadi bahan pengisian nilai pada e-Rapor Kurikulum Merdeka.</div>
+ </div>
+</section>
+
+</main>
+
+<footer class="foot">
+ <p><b>RPM Interaktif Biologi XII</b></p>
+ <p>Sistem Peredaran Darah dan Penggolongan Darah (ABO dan Rhesus)</p>
+ <p>Guru pengampu: Megawati Ciptaning, S.Si., M.Pd.</p>
+</footer>
+
+<script>
+/* Kode ditulis dengan gaya ES5 agar jalan di HP Android lama */
+function $(id){return document.getElementById(id);}
+function qa(sel){return document.querySelectorAll(sel);}
+function each(list,fn){for(var i=0;i<list.length;i++){fn(list[i],i);}}
+function trim(s){return String(s).replace(/^\s+|\s+$/g,'');}
+function shuffle(n){var a=[],i,j,t;for(i=0;i<n;i++){a.push(i);}for(i=n-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function setFb(el,type,html){el.className='fb '+type;el.innerHTML=html;}
+
+var GURU='Megawati Ciptaning, S.Si., M.Pd.';
+var state={
+  diagScore:0,diagDone:[],diagCount:0,
+  sim1Path:[],sim1Type:'pulmonalis',sim1Done:{pulmonalis:false,sistemik:false},
+  sim2Patient:'1',sim2Drops:{A:false,B:false,D:false},sim2Solved:{},
+  lkpdScore:null,
+  game:{name:'',hero:'Dr. Hemato',idx:0,score:0,lives:3,timer:30,timerId:null,correct:0,answeredCount:0,answered:false,order:[],finished:false}
+};
+
+/* ---------- Navigasi ---------- */
+function switchTab(id){
+  each(qa('.tab-content'),function(e){e.classList.add('hid');});
+  each(qa('.tab-btn'),function(b){b.classList.remove('on');});
+  $('sec-'+id).classList.remove('hid');
+  $('tab-'+id).classList.add('on');
+  window.scrollTo(0,0);
+}
+function switchMateriSub(id){
+  each(qa('.subcontent-materi'),function(e){e.classList.add('hid');});
+  each(qa('.submateri-btn'),function(b){b.classList.remove('on');});
+  $('subcontent-'+id).classList.remove('hid');
+  $('subtab-'+id).classList.add('on');
+}
+
+/* ---------- Tes awal ---------- */
+var diagQ=[
+ {q:'Bagian darah yang tugas utamanya mengangkut oksigen adalah ...',o:['Leukosit','Eritrosit','Trombosit'],a:1,w:'Eritrosit (sel darah merah) mengandung hemoglobin yang mengikat oksigen.'},
+ {q:'Ruang jantung yang memompa darah kaya oksigen ke seluruh tubuh adalah ...',o:['Serambi kanan','Bilik kanan','Bilik kiri'],a:2,w:'Bilik kiri memompa darah kaya O<sub>2</sub> ke seluruh tubuh lewat aorta.'},
+ {q:'Orang bergolongan darah B memiliki antigen (aglutinogen) ... di permukaan sel darah merahnya.',o:['Antigen A','Antigen B','Tidak punya antigen'],a:1,w:'Golongan B hanya punya antigen B di permukaan sel darah merahnya.'},
+ {q:'Golongan darah yang disebut resipien universal adalah ...',o:['AB+','O-','A+'],a:0,w:'Plasma AB+ tidak mengandung antibodi anti-A, anti-B, maupun anti-Rh. Jadi, secara teori AB+ dapat menerima darah dari semua golongan.'}
+];
+function makeDiagBtn(i,j,text){
+  var b=document.createElement('button');
+  b.type='button';b.className='choice';b.id='dc-'+i+'-'+j;
+  b.innerHTML=String.fromCharCode(65+j)+'. '+text;
+  b.onclick=function(){checkDiag(i,j);};
+  return b;
+}
+function renderDiag(){
+  var box=$('diag-list'),i,j,q,d,fb;
+  box.innerHTML='';
+  for(i=0;i<diagQ.length;i++){
+    q=diagQ[i];
+    d=document.createElement('div');d.className='q';
+    d.innerHTML='<div class="qn">Soal '+(i+1)+' dari '+diagQ.length+'</div><div class="qt">'+q.q+'</div>';
+    for(j=0;j<q.o.length;j++){d.appendChild(makeDiagBtn(i,j,q.o[j]));}
+    fb=document.createElement('div');fb.id='diag-fb-'+i;fb.className='fb hid';
+    d.appendChild(fb);
+    box.appendChild(d);
+  }
+}
+function checkDiag(i,j){
+  if(state.diagDone[i]){return;}
+  state.diagDone[i]=true;state.diagCount++;
+  var q=diagQ[i],fb=$('diag-fb-'+i),k;
+  for(k=0;k<q.o.length;k++){
+    $('dc-'+i+'-'+k).disabled=true;
+  }
+  $('dc-'+i+'-'+q.a).classList.add('right');
+  if(j===q.a){
+    state.diagScore++;
+    setFb(fb,'ok','<b>Benar!</b> '+q.w);
+  }else{
+    $('dc-'+i+'-'+j).classList.add('wrong');
+    setFb(fb,'no','<b>Belum tepat.</b> Jawaban yang benar adalah '+String.fromCharCode(65+q.a)+'. '+q.w);
+  }
+  var badge=$('diag-score-badge');
+  badge.classList.remove('hid');
+  badge.innerHTML='Skor: '+state.diagScore+' / '+diagQ.length;
+  updateRekap();
+}
+function resetDiag(){
+  state.diagScore=0;state.diagDone=[];state.diagCount=0;
+  $('diag-score-badge').classList.add('hid');
+  renderDiag();updateRekap();
+}
+
+/* ---------- Diagram jantung ---------- */
+var heartData={
+ ra:{t:'Serambi Kanan (Atrium Dextrum)',o:'Kaya CO<sub>2</sub> (miskin O<sub>2</sub>)',c:'co2',d:'Menerima darah kaya karbon dioksida dari seluruh tubuh lewat Vena Cava Superior dan Vena Cava Inferior.',f:'Dindingnya relatif tipis karena hanya mengalirkan darah ke bilik kanan yang letaknya tepat di bawahnya.'},
+ rv:{t:'Bilik Kanan (Ventrikel Dextrum)',o:'Kaya CO<sub>2</sub> (miskin O<sub>2</sub>)',c:'co2',d:'Memompa darah kaya CO<sub>2</sub> ke paru-paru lewat Arteri Pulmonalis agar terjadi pertukaran gas.',f:'Di antara serambi kanan dan bilik kanan ada katup trikuspidalis yang mencegah darah mengalir balik.'},
+ la:{t:'Serambi Kiri (Atrium Sinistrum)',o:'Kaya O<sub>2</sub> (segar)',c:'o2',d:'Menerima darah segar kaya oksigen dari paru-paru lewat Vena Pulmonalis.',f:'Darah mengalir dari serambi kiri ke bilik kiri melewati katup bikuspidalis (katup mitral).'},
+ lv:{t:'Bilik Kiri (Ventrikel Sinistrum)',o:'Kaya O<sub>2</sub> (segar)',c:'o2',d:'Memompa darah kaya oksigen ke seluruh tubuh dengan tekanan tinggi lewat Aorta.',f:'Dinding bilik kiri adalah yang paling tebal di antara semua ruang jantung.'},
+ aorta:{t:'Aorta',o:'Kaya O<sub>2</sub>',c:'o2',d:'Pembuluh arteri terbesar di tubuh manusia. Aorta keluar langsung dari bilik kiri.',f:'Di pangkal aorta ada katup semilunar yang menjaga agar darah mengalir satu arah.'}
+};
+var heartKeys=['ra','rv','la','lv','aorta'];
+function showHeartDetail(k){
+  var h=heartData[k];if(!h){return;}
+  $('heart-info-default').classList.add('hid');
+  $('heart-info-detail').classList.remove('hid');
+  $('heart-title').innerHTML=h.t;
+  var ox=$('heart-oxygen');ox.innerHTML=h.o;ox.className='tagO '+h.c;
+  $('heart-desc').innerHTML=h.d;
+  $('heart-fact').innerHTML=h.f;
+  for(var i=0;i<heartKeys.length;i++){
+    var key=heartKeys[i],on=(key===k);
+    $('p-'+key).setAttribute('stroke',on?'#fde047':'#1e293b');
+    $('p-'+key).setAttribute('stroke-width',on?'7':'4');
+    $('hb-'+key).className=on?'on':'';
+  }
+}
+
+/* ---------- Simulasi 1 ---------- */
+var sim1Data={
+ pulmonalis:{
+  label:'kecil',
+  options:[
+   {id:'PARU',text:'Paru-paru (alveolus)',ox:'pertukaran gas'},
+   {id:'SKi',text:'Serambi kiri jantung',ox:'kaya O2'},
+   {id:'BKa',text:'Bilik kanan jantung',ox:'kaya CO2'},
+   {id:'VP',text:'Vena pulmonalis',ox:'kaya O2'},
+   {id:'AP',text:'Arteri pulmonalis',ox:'kaya CO2'}
+  ],
+  order:['BKa','AP','PARU','VP','SKi']
+ },
+ sistemik:{
+  label:'besar',
+  options:[
+   {id:'VC',text:'Vena cava',ox:'kaya CO2'},
+   {id:'BKi',text:'Bilik kiri jantung',ox:'kaya O2'},
+   {id:'SKa',text:'Serambi kanan jantung',ox:'kaya CO2'},
+   {id:'AO',text:'Aorta',ox:'kaya O2'},
+   {id:'TUB',text:'Sel / jaringan tubuh',ox:'pertukaran gas'}
+  ],
+  order:['BKi','AO','TUB','VC','SKa']
+ }
+};
+function makeSim1Btn(opt,used){
+  var b=document.createElement('button');
+  b.type='button';b.disabled=used;
+  b.innerHTML='<span class="ox">'+opt.ox+'</span>'+opt.text;
+  b.onclick=function(){addSim1Step(opt);};
+  return b;
+}
+function setSimType(type){
+  state.sim1Type=type;state.sim1Path=[];
+  $('btn-pulmonalis').className=(type==='pulmonalis')?'btn':'btn alt';
+  $('btn-sistemik').className=(type==='sistemik')?'btn':'btn alt';
+  renderSim1();
+}
+function renderSim1(){
+  var data=sim1Data[state.sim1Type],pool=$('sim1-options'),path=$('sim1-user-path'),i,j,used,el;
+  pool.innerHTML='';
+  for(i=0;i<data.options.length;i++){
+    used=false;
+    for(j=0;j<state.sim1Path.length;j++){if(state.sim1Path[j].id===data.options[i].id){used=true;}}
+    pool.appendChild(makeSim1Btn(data.options[i],used));
+  }
+  path.innerHTML='';
+  if(state.sim1Path.length===0){
+    path.innerHTML='<p class="small" style="text-align:center;padding:30px 6px;margin:0">Belum ada langkah. Ketuk bagian di sebelah atau di atas ini untuk memulai.</p>';
+  }else{
+    for(i=0;i<state.sim1Path.length;i++){
+      el=document.createElement('div');el.className='pathitem';
+      el.innerHTML='<span class="ox">'+state.sim1Path[i].ox+'</span><span class="num">'+(i+1)+'</span>'+state.sim1Path[i].text;
+      path.appendChild(el);
+    }
+  }
+  $('sim1-feedback').className='fb hid';
+}
+function addSim1Step(opt){state.sim1Path.push(opt);renderSim1();}
+function undoSim1(){state.sim1Path.pop();renderSim1();}
+function resetSim1(){state.sim1Path=[];renderSim1();}
+function validateSim1(){
+  var data=sim1Data[state.sim1Type],fb=$('sim1-feedback'),p=state.sim1Path,i,wrong=-1;
+  if(p.length<data.order.length){
+    setFb(fb,'warn','Langkahmu baru '+p.length+' dari '+data.order.length+'. Lengkapi dulu urutannya.');
+    return;
+  }
+  for(i=0;i<data.order.length;i++){if(p[i].id!==data.order[i]){wrong=i;break;}}
+  if(wrong===-1){
+    var names=[];
+    for(i=0;i<p.length;i++){names.push(p[i].text);}
+    setFb(fb,'ok','<b>Hebat!</b> Urutan peredaran darah '+data.label+' sudah benar:<br>'+names.join(' &rarr; '));
+    state.sim1Done[state.sim1Type]=true;
+    updateRekap();
+  }else{
+    setFb(fb,'no','<b>Belum tepat.</b> Langkah ke-'+(wrong+1)+' masih keliru. Tekan "Hapus Langkah Terakhir" atau "Ulangi", lalu coba lagi.');
+  }
+}
+
+/* ---------- Simulasi 2 ---------- */
+var patients={
+ '1':{name:'Tn. Budi',blood:'A+',r:{A:true,B:false,D:true}},
+ '2':{name:'Ny. Siti',blood:'B-',r:{A:false,B:true,D:false}},
+ '3':{name:'An. Doni',blood:'AB+',r:{A:true,B:true,D:true}},
+ '4':{name:'Tn. Andi',blood:'O-',r:{A:false,B:false,D:false}}
+};
+function loadPatientLab(){
+  state.sim2Patient=$('sim2-patient-select').value;
+  state.sim2Drops={A:false,B:false,D:false};
+  var ks=['A','B','D'],i,l;
+  for(i=0;i<ks.length;i++){
+    l=ks[i].toLowerCase();
+    $('well-'+l).className='well';
+    $('wl-'+l).innerHTML='Belum diuji';
+    $('wl-'+l).style.color='#cbd5e1';
+    $('drop-'+l).disabled=false;
+    $('drop-'+l).innerHTML='Teteskan';
+  }
+  $('sim2-user-deduction').value='';
+  $('sim2-feedback').className='fb hid';
+}
+function dropSerum(t){
+  var p=patients[state.sim2Patient],l=t.toLowerCase(),g=p.r[t];
+  state.sim2Drops[t]=true;
+  $('well-'+l).className=g?'well clump':'well smooth';
+  $('wl-'+l).innerHTML=g?'Menggumpal':'Tidak menggumpal';
+  $('wl-'+l).style.color=g?'#fbbf24':'#6ee7b7';
+  $('drop-'+l).disabled=true;
+  $('drop-'+l).innerHTML='Sudah diteteskan';
+}
+function verifyLabResult(){
+  var fb=$('sim2-feedback'),v=$('sim2-user-deduction').value,p=patients[state.sim2Patient],d=state.sim2Drops;
+  if(!(d.A&&d.B&&d.D)){
+    setFb(fb,'warn','Teteskan ketiga serum (Anti-A, Anti-B, dan Anti-D) dulu, lalu amati hasilnya.');
+    return;
+  }
+  if(!v){
+    setFb(fb,'warn','Pilih golongan darah pasien dulu.');
+    return;
+  }
+  if(v===p.blood){
+    var r=p.r;
+    setFb(fb,'ok','<b>Tepat!</b> Golongan darah '+p.name+' adalah '+p.blood+'.<br>'+
+      'Anti-A '+(r.A?'menggumpal, berarti ada antigen A.':'tidak menggumpal, berarti tidak ada antigen A.')+'<br>'+
+      'Anti-B '+(r.B?'menggumpal, berarti ada antigen B.':'tidak menggumpal, berarti tidak ada antigen B.')+'<br>'+
+      'Anti-D '+(r.D?'menggumpal, berarti Rh positif.':'tidak menggumpal, berarti Rh negatif.'));
+    state.sim2Solved[state.sim2Patient]=true;
+    updateRekap();
+  }else{
+    setFb(fb,'no','<b>Belum tepat.</b> Periksa lagi hasil gumpalan di ketiga cawan, lalu coba pilih golongan darah yang lain.');
+  }
+}
+
+/* ---------- LKPD ---------- */
+var lkpdKeys=['BK','Aorta','Tubuh','Vena','SKa'];
+var lkpdOpts=[['Aorta','Aorta'],['SKa','Serambi kanan'],['BK','Bilik kiri'],['Vena','Vena cava'],['Tubuh','Jaringan tubuh']];
+function fillSteps(){
+  var box=$('lkpd-steps'),h='',i,j,lab;
+  for(i=1;i<=5;i++){
+    lab=(i===1)?'Langkah 1 (awal)':(i===5?'Langkah 5 (akhir)':'Langkah '+i);
+    h+='<label for="lkpd-m1-step'+i+'">'+lab+'</label><select id="lkpd-m1-step'+i+'"><option value="">-- Pilih --</option>';
+    for(j=0;j<lkpdOpts.length;j++){h+='<option value="'+lkpdOpts[j][0]+'">'+lkpdOpts[j][1]+'</option>';}
+    h+='</select>';
+  }
+  box.innerHTML=h;
+}
+function toggleTeacherKey(){
+  var p=$('teacher-key-panel'),t=$('key-btn-text');
+  if(p.classList.contains('hid')){p.classList.remove('hid');t.innerHTML='Sembunyikan Kunci Pembahasan';}
+  else{p.classList.add('hid');t.innerHTML='Tampilkan Kunci Pembahasan (Guru)';}
+}
+function checkLKPD(){
+  var i,v,vals=[],empty=false,dup=false,seen={},wrong=-1,m1=false,a=false;
+  for(i=1;i<=5;i++){
+    v=$('lkpd-m1-step'+i).value;vals.push(v);
+    if(!v){empty=true;}else if(seen[v]){dup=true;}else{seen[v]=true;}
+  }
+  var f1=$('lkpd-m1-fb');
+  if(empty){setFb(f1,'warn','Misi 1 belum lengkap. Isi kelima langkah dulu.');}
+  else if(dup){setFb(f1,'warn','Ada bagian yang dipakai lebih dari satu kali. Setiap bagian hanya boleh dipakai satu kali.');}
+  else{
+    for(i=0;i<5;i++){if(vals[i]!==lkpdKeys[i]){wrong=i;break;}}
+    if(wrong===-1){m1=true;setFb(f1,'ok','<b>Misi 1 benar!</b> Jalurnya: bilik kiri, aorta, jaringan tubuh, vena cava, serambi kanan.');}
+    else{setFb(f1,'no','<b>Misi 1 belum tepat.</b> Langkah ke-'+(wrong+1)+' masih keliru. Diskusikan lagi bersama kelompokmu.');}
+  }
+  var ans=$('lkpd-m2-a').value,f2=$('lkpd-m2a-fb');
+  if(!ans){setFb(f2,'warn','Kasus A belum dijawab. Pilih satu kantong darah.');}
+  else if(ans==='B-'){a=true;setFb(f2,'ok','<b>Kasus A benar!</b> Plasma Rina mengandung antibodi anti-A, jadi darah yang punya antigen A akan digumpalkan. Kantong B- tidak punya antigen A dan tidak punya antigen Rh.');}
+  else{setFb(f2,'no','<b>Kasus A belum tepat.</b> Ingat, plasma Rina mengandung antibodi anti-A. Kantong mana yang tidak punya antigen A?');}
+  var tb=trim($('lkpd-m2-b').value),f3=$('lkpd-m2b-fb');
+  if(tb.length<20){setFb(f3,'warn','Kasus B belum diisi. Tulis alasan kelompokmu minimal satu atau dua kalimat.');}
+  else{setFb(f3,'info','Jawaban Kasus B sudah tercatat dan akan dinilai oleh guru.');}
+  var score=(m1?50:0)+(a?50:0),st=$('lkpd-status');
+  setFb(st,(score===100)?'ok':'warn','<b>Nilai otomatis (Misi 1 dan Kasus A): '+score+' dari 100.</b> Kasus B dinilai oleh guru.');
+  state.lkpdScore=score;
+  updateRekap();
+}
+
+/* ---------- Game Biology Hero ---------- */
+var gameQuestions=[
+ {level:1,q:'Bagian darah yang bentuknya bikonkaf, tidak punya inti sel, dan kaya hemoglobin adalah ...',opts:['Leukosit','Eritrosit','Trombosit','Plasma darah'],ans:1,exp:'Eritrosit (sel darah merah) berbentuk bikonkaf dan tidak berinti. Bentuk ini memberi ruang lebih banyak bagi hemoglobin untuk mengikat O<sub>2</sub>.',tax:'Pemahaman (C2)'},
+ {level:1,q:'Dinding otot bilik kiri adalah yang paling tebal di antara ruang jantung lainnya karena bilik kiri ...',opts:['memompa darah kaya CO<sub>2</sub> ke paru-paru','memompa darah ke seluruh tubuh dengan tekanan tinggi','menerima darah dari vena cava','menampung darah paling banyak'],ans:1,exp:'Bilik kiri memompa darah ke seluruh tubuh (peredaran darah besar), sehingga membutuhkan tekanan paling besar.',tax:'Penerapan (C3)'},
+ {level:1,q:'Katup trikuspidalis pada jantung berfungsi agar ...',opts:['darah dari bilik kanan tidak mengalir balik ke serambi kanan','darah dari aorta tidak mengalir balik ke bilik kiri','darah dari paru-paru langsung masuk ke aorta','darah dari serambi kiri masuk ke vena'],ans:0,exp:'Katup trikuspidalis berada di antara serambi kanan dan bilik kanan. Katup ini mencegah darah mengalir balik.',tax:'Pemahaman (C2)'},
+ {level:1,q:'Seorang pasien sulit berhenti berdarah karena kekurangan vitamin K dan keping darah. Komponen darah yang terganggu adalah ...',opts:['Eritrosit','Leukosit','Trombosit','Albumin'],ans:2,exp:'Trombosit membantu membentuk benang-benang fibrin saat darah membeku.',tax:'Penerapan (C3)'},
+ {level:1,q:'Ciri khas arteri yang membedakannya dari vena adalah ...',opts:['aliran lambat dan darah menetes jika terluka','dinding tipis dan memiliki banyak katup','dinding tebal, elastis, dan darah memancar jika terluka','selalu membawa darah kaya CO<sub>2</sub>'],ans:2,exp:'Dinding arteri tebal dan elastis agar mampu menahan tekanan tinggi dari denyut jantung.',tax:'Pemahaman (C2)'},
+ {level:1,q:'Jalur peredaran darah kecil (pulmonal) yang benar adalah ...',opts:['Bilik kiri &rarr; aorta &rarr; tubuh &rarr; vena cava &rarr; serambi kanan','Bilik kanan &rarr; arteri pulmonalis &rarr; paru-paru &rarr; vena pulmonalis &rarr; serambi kiri','Serambi kanan &rarr; paru-paru &rarr; bilik kiri','Aorta &rarr; paru-paru &rarr; vena cava'],ans:1,exp:'Peredaran darah kecil mengalirkan darah dari jantung (bilik kanan) ke paru-paru untuk mengambil O<sub>2</sub>, lalu kembali ke jantung (serambi kiri).',tax:'Penerapan (C3)'},
+ {level:2,q:'Seseorang punya antigen A di permukaan sel darah merahnya dan antibodi anti-B di plasmanya. Golongan darahnya adalah ...',opts:['Golongan A','Golongan B','Golongan AB','Golongan O'],ans:0,exp:'Golongan A memiliki antigen A dan antibodi anti-B.',tax:'Pemahaman (C2)'},
+ {level:2,q:'Mengapa golongan darah AB disebut resipien universal?',opts:['Karena tidak punya antigen','Karena plasmanya tidak mengandung antibodi anti-A maupun anti-B','Karena punya sel darah merah paling banyak','Karena dapat mendonorkan darah ke semua orang'],ans:1,exp:'Plasma golongan AB tidak punya antibodi anti-A dan anti-B, sehingga tidak menggumpalkan sel darah merah dari donor golongan lain.',tax:'Penerapan (C3)'},
+ {level:2,q:'Pada uji golongan darah, sampel menggumpal dengan serum Anti-A dan Anti-D, tetapi tidak menggumpal dengan serum Anti-B. Golongan darah sampel tersebut adalah ...',opts:['A positif (A+)','B negatif (B-)','AB positif (AB+)','O positif (O+)'],ans:0,exp:'Menggumpal dengan Anti-A berarti ada antigen A. Tidak menggumpal dengan Anti-B berarti tidak ada antigen B. Menggumpal dengan Anti-D berarti Rh positif. Jadi golongan darahnya A+.',tax:'Analisis (C4)'},
+ {level:2,q:'Eritroblastosis fetalis dapat terjadi jika ...',opts:['ibu Rh+ mengandung janin Rh-','ibu Rh- mengandung janin Rh+','ibu bergolongan O mengandung janin bergolongan AB','ayah dan ibu sama-sama Rh-'],ans:1,exp:'Ibu Rh- yang mengandung janin Rh+ dapat membentuk antibodi anti-Rh. Pada kehamilan berikutnya, antibodi ini dapat menembus plasenta dan merusak sel darah merah janin.',tax:'Analisis (C4)'},
+ {level:2,q:'Dalam keadaan gawat darurat dan tidak ada waktu untuk uji silang, sel darah merah yang paling kecil risikonya digumpalkan adalah golongan ...',opts:['AB+','O-','B+','A-'],ans:1,exp:'Golongan O- tidak punya antigen A, antigen B, maupun antigen Rh, sehingga sel darahnya paling kecil kemungkinan diserang antibodi penerima.',tax:'Penerapan (C3)'},
+ {level:2,q:'Prosedur yang harus dilakukan sebelum transfusi di rumah sakit agar aman adalah ...',opts:['mengukur tekanan darah saja','uji silang serasi (crossmatching)','mengukur kadar gula darah','memberikan vitamin K'],ans:1,exp:'Uji silang serasi mencocokkan langsung darah donor dengan darah penerima untuk mencegah reaksi imun yang berbahaya.',tax:'Pemahaman (C2)'}
+];
+var GAME_TIME=30;
+
+function selectHero(name,btn){
+  state.game.hero=name;
+  each(qa('.hero-btn'),function(b){b.classList.remove('sel');});
+  btn.classList.add('sel');
+}
+function startGame(){
+  var nm=trim($('game-player-name').value),msg=$('game-reg-msg'),g=state.game;
+  if(!nm){setFb(msg,'warn','Tulis namamu dulu, lalu tekan Mulai Misi.');return;}
+  msg.className='fb warn hid';
+  g.name=nm;g.idx=0;g.score=0;g.lives=3;g.correct=0;g.answeredCount=0;g.finished=false;
+  if(!trim($('rekap-name').value)){$('rekap-name').value=nm;}
+  $('game-screen-reg').classList.add('hid');
+  $('game-screen-result').classList.add('hid');
+  $('game-screen-play').classList.remove('hid');
+  $('game-hud-name').innerHTML='';
+  $('game-hud-name').appendChild(document.createTextNode(g.hero+' - '+g.name));
+  loadGameQuestion();
+}
+function makeGameOpt(p,text){
+  var b=document.createElement('button');
+  b.type='button';b.className='gopt';
+  b.innerHTML='<span class="ltr">'+String.fromCharCode(65+p)+'</span>'+text;
+  b.onclick=function(){answerGame(p);};
+  return b;
+}
+function loadGameQuestion(){
+  var g=state.game,q=gameQuestions[g.idx],box=$('game-options-container'),p;
+  clearInterval(g.timerId);
+  g.answered=false;
+  $('game-explanation-toast').classList.add('hid');
+  $('game-hud-level').innerHTML='Level '+q.level+': '+(q.level===1?'Peredaran Darah':'Golongan Darah dan Transfusi');
+  $('game-hud-lives').innerHTML=g.lives;
+  $('game-hud-score').innerHTML=g.score;
+  $('game-q-number').innerHTML='Soal '+(g.idx+1)+' dari '+gameQuestions.length;
+  $('game-q-badge').innerHTML=q.tax;
+  $('game-q-text').innerHTML=q.q;
+  g.order=shuffle(q.opts.length);
+  box.innerHTML='';
+  for(p=0;p<g.order.length;p++){box.appendChild(makeGameOpt(p,q.opts[g.order[p]]));}
+  g.timer=GAME_TIME;
+  $('game-hud-timer').innerHTML=g.timer;
+  g.timerId=setInterval(function(){
+    if(document.hidden||$('sec-game').classList.contains('hid')){return;}
+    g.timer--;
+    $('game-hud-timer').innerHTML=Math.max(g.timer,0);
+    if(g.timer<=0){answerGame(-1);}
+  },1000);
+}
+function answerGame(p){
+  var g=state.game;
+  if(g.answered){return;}
+  g.answered=true;
+  clearInterval(g.timerId);
+  var q=gameQuestions[g.idx],btns=$('game-options-container').getElementsByTagName('button'),i,correctPos=-1,right;
+  for(i=0;i<g.order.length;i++){if(g.order[i]===q.ans){correctPos=i;}}
+  right=(p>=0&&g.order[p]===q.ans);
+  g.answeredCount++;
+  for(i=0;i<btns.length;i++){
+    btns[i].disabled=true;
+    if(i===correctPos){btns[i].classList.add('ok');btns[i].innerHTML+='<span class="mk">Benar</span>';}
+    else if(i===p){btns[i].classList.add('bad');btns[i].innerHTML+='<span class="mk">Salah</span>';}
+  }
+  var tt=$('game-toast-title');
+  if(right){
+    var pts=10+Math.ceil(g.timer/2);
+    g.score+=pts;g.correct++;
+    tt.className='tt ok';tt.innerHTML='Jawabanmu benar! (+'+pts+' poin)';
+  }else{
+    g.lives--;
+    tt.className='tt no';tt.innerHTML=(p===-1)?'Waktu habis!':'Jawabanmu belum tepat.';
+  }
+  $('game-hud-lives').innerHTML=g.lives;
+  $('game-hud-score').innerHTML=g.score;
+  var extra=(g.lives<=0)?' <b>Nyawamu habis, misi berakhir.</b>':'';
+  $('game-toast-body').innerHTML=q.exp+extra;
+  $('game-next-btn').innerHTML=(g.lives<=0||g.idx>=gameQuestions.length-1)?'Lihat Hasil':'Soal Berikutnya';
+  $('game-explanation-toast').classList.remove('hid');
+}
+function nextQuestion(){
+  var g=state.game;
+  g.idx++;
+  if(g.idx>=gameQuestions.length||g.lives<=0){endGame();}else{loadGameQuestion();}
+}
+function endGame(){
+  var g=state.game;
+  clearInterval(g.timerId);
+  g.finished=true;
+  $('game-screen-play').classList.add('hid');
+  $('game-screen-result').classList.remove('hid');
+  var acc=g.answeredCount>0?Math.round(g.correct/g.answeredCount*100):0;
+  $('game-res-name').innerHTML='';
+  $('game-res-name').appendChild(document.createTextNode(g.name));
+  $('game-res-score').innerHTML=g.score+' poin';
+  $('game-res-accuracy').innerHTML=acc+'% (benar '+g.correct+' dari '+g.answeredCount+' soal yang dijawab)';
+  var b=$('game-res-badge'),r=$('game-res-recom');
+  if(acc>=80){
+    b.innerHTML='Master Bio-Hero (Sangat Baik)';
+    r.innerHTML='Selamat! Pemahamanmu tentang peredaran darah dan transfusi ABO/Rh sudah sangat baik. Kamu siap membantu teman yang masih kesulitan.';
+  }else if(acc>=60){
+    b.innerHTML='Cadet Bio-Hero (Baik)';
+    r.innerHTML='Hasilmu sudah baik. Coba ulangi Simulasi 1 dan Simulasi 2 agar pemahamanmu makin kuat.';
+  }else{
+    b.innerHTML='Rekrut Baru (Perlu Belajar Lagi)';
+    r.innerHTML='Tetap semangat! Baca lagi Modul 1 dan Modul 2, coba simulasinya, lalu mainkan game ini sekali lagi.';
+  }
+  updateRekap();
+  window.scrollTo(0,0);
+}
+function resetGame(){
+  $('game-screen-result').classList.add('hid');
+  $('game-screen-reg').classList.remove('hid');
+  $('game-copy-msg').className='fb hid';
+  $('game-copy-box').className='copybox hid';
+}
+
+/* ---------- Rekap & salin ---------- */
+function updateRekap(){
+  var n1=0,n2=0,k;
+  if(state.sim1Done.pulmonalis){n1++;}
+  if(state.sim1Done.sistemik){n1++;}
+  for(k in state.sim2Solved){if(state.sim2Solved[k]){n2++;}}
+  $('rekap-diag').innerHTML=state.diagCount>0?(state.diagScore+' / '+diagQ.length):'Belum';
+  $('rekap-sim1').innerHTML=n1>0?(n1+' dari 2 jalur'):'Belum';
+  $('rekap-sim2').innerHTML=n2>0?(n2+' dari 4 pasien'):'Belum';
+  $('rekap-lkpd').innerHTML=(state.lkpdScore===null)?'Belum':('Nilai '+state.lkpdScore);
+  $('rekap-game').innerHTML=state.game.finished?(state.game.score+' poin'):'Belum';
+}
+function copyText(text,msgEl,boxEl){
+  function done(ok){
+    if(ok){
+      setFb(msgEl,'ok','Berhasil disalin. Tempelkan di pesan untuk gurumu.');
+      boxEl.className='copybox hid';
+    }else{
+      setFb(msgEl,'warn','Penyalinan otomatis tidak bisa dipakai di HP ini. Tekan lama teks di bawah, pilih "Pilih semua", lalu "Salin".');
+      boxEl.className='copybox';
+      boxEl.value=text;
+      boxEl.focus();
+      boxEl.select();
+    }
+  }
+  function fallback(){
+    var ta=document.createElement('textarea'),ok=false;
+    ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.top='0';ta.style.left='0';ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.focus();ta.select();
+    try{ta.setSelectionRange(0,99999);}catch(e1){}
+    try{ok=document.execCommand('copy');}catch(e2){ok=false;}
+    document.body.removeChild(ta);
+    done(ok);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){done(true);},function(){fallback();});
+  }else{fallback();}
+}
+function copyGameResult(){
+  var g=state.game;
+  var t='REKAP GAME BIOLOGY HERO\nNama: '+g.name+'\nSkor: '+g.score+' poin\nKetepatan: '+$('game-res-accuracy').innerHTML+'\nGuru pengampu: '+GURU;
+  copyText(t,$('game-copy-msg'),$('game-copy-box'));
+}
+function copyFullSummary(){
+  var nm=trim($('rekap-name').value)||state.game.name||'-';
+  var t='=== REKAP BELAJAR BIOLOGI XII ===\n'+
+    'Materi: Peredaran Darah dan Penggolongan Darah\n'+
+    'Nama: '+nm+'\n'+
+    'Tes Awal: '+$('rekap-diag').innerHTML+'\n'+
+    'Simulasi 1: '+$('rekap-sim1').innerHTML+'\n'+
+    'Simulasi 2: '+$('rekap-sim2').innerHTML+'\n'+
+    'LKPD: '+$('rekap-lkpd').innerHTML+'\n'+
+    'Game Biology Hero: '+$('rekap-game').innerHTML+'\n'+
+    'Guru pengampu: '+GURU+'\n'+
+    '=================================';
+  copyText(t,$('rekap-copy-msg'),$('rekap-copy-box'));
+}
+
+/* ---------- Mulai ---------- */
+$('game-total').innerHTML=gameQuestions.length;
+renderDiag();
+fillSteps();
+renderSim1();
+loadPatientLab();
+updateRekap();
+</script>
+</body>
+</html>
